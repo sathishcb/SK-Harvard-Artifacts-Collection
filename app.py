@@ -6,10 +6,17 @@ from sqlalchemy import create_engine, text
 
 # ---------------- API & DB CONFIG ----------------
 API_KEY = "--------" # <---- CHANGE THIS
-engine = create_engine("mysql+mysqlconnector://root:root@localhost:3306/harvard_artifacts", pool_pre_ping=True)
+#engine = create_engine("mysql+mysqlconnector://root:root@localhost:3306/harvard_artifacts", pool_pre_ping=True)
 #TiDB Cloud:
 #engine = create_engine("mysql+mysqlconnector://<user>:<password>@<host>:4000/<database>")
+DB_USER = "root"
+DB_PASSWORD = "root"
+DB_HOST = "localhost"
+DB_NAME = "harvard_artifacts"
+DB_PORT = 3306   # MySQL = 3306, TiDB = 4000
 
+ENGINE_URL = f"mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+engine = create_engine(ENGINE_URL, pool_pre_ping=True)
 
 # ---------------- FAST ASYNC FETCH 2500 ----------------
 async def fetch_page(session, url, params):
@@ -354,5 +361,6 @@ if st.session_state.show_insert and not st.session_state.show_queries:
                     
 
             st.session_state.insert_disabled = True
+
 
 
