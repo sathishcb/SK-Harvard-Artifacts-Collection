@@ -5,7 +5,7 @@ import streamlit as st
 from sqlalchemy import create_engine, text
 
 # ---------------- API & DB CONFIG ----------------
-API_KEY = "b1dd8858-3d79-4edd-8393-7df62e66e501"
+API_KEY = "--------" # <---- CHANGE THIS
 engine = create_engine("mysql+mysqlconnector://root:root@localhost:3306/harvard_artifacts", pool_pre_ping=True)
 
 # ---------------- FAST ASYNC FETCH 2500 ----------------
@@ -351,3 +351,4 @@ if st.session_state.show_insert and not st.session_state.show_queries:
                     
 
             st.session_state.insert_disabled = True
+
