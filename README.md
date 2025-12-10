@@ -74,14 +74,18 @@ Stores general information about artifacts.
 Harvard-Artifacts-Project/  
 │── app.py  
 │── README.md  
-│── requirements.txt  
-│── database/schema.sql  
+│── requirements.txt
+│── run_sql_schema.py  
+│── schema.sql  
 
 # ⚙️ Setup Instructions
 ```bash
 python -m venv venv
 venv\Scripts\activate
+# if error comes use this : Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+venv\Scripts\activate
 pip install -r requirements.txt
+run_sql_schema.py
 ```
 
 # ▶️ Running the Application
