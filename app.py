@@ -7,6 +7,9 @@ from sqlalchemy import create_engine, text
 # ---------------- API & DB CONFIG ----------------
 API_KEY = "--------" # <---- CHANGE THIS
 engine = create_engine("mysql+mysqlconnector://root:root@localhost:3306/harvard_artifacts", pool_pre_ping=True)
+#TiDB Cloud:
+#engine = create_engine("mysql+mysqlconnector://<user>:<password>@<host>:4000/<database>")
+
 
 # ---------------- FAST ASYNC FETCH 2500 ----------------
 async def fetch_page(session, url, params):
@@ -351,4 +354,5 @@ if st.session_state.show_insert and not st.session_state.show_queries:
                     
 
             st.session_state.insert_disabled = True
+
 
