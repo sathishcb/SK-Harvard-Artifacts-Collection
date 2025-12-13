@@ -1,4 +1,4 @@
-# 🎨🏛 Harvard Artifacts Collection — ETL, SQL Analytics & Streamlit Dashboard  
+# 🏛️ Harvard’s Artifacts Collection: ETL, SQL Analytics & Streamlit Showcase
 ### End-to-End Data Engineering Project using Harvard Art Museums API
 
 ## 📘 Table of Contents
