@@ -72,11 +72,17 @@ Stores general information about artifacts.
 
 # 📁 Project Structure
 Harvard-Artifacts-Project/  
-│── app.py  
-│── README.md  
-│── requirements.txt
-│── run_sql_schema.py  
-│── schema.sql  
+│
+├── app.py                # Main Streamlit UI Application
+├── api.py                # Async Harvard API fetch functions
+├── database.py           # Database engine, insert logic
+├── queries.py            # All 25 SQL queries stored clearly
+├── config.py             # API key + database credentials
+├── schema.sql            # Database schema (tables)
+│
+├── requirements.txt      # Python dependencies
+└── README.md             # Project documentation
+
 
 # ⚙️ Setup Instructions
 ```bash
@@ -85,7 +91,6 @@ venv\Scripts\activate
 # if error comes use this : Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 venv\Scripts\activate
 pip install -r requirements.txt
-run_sql_schema.py
 ```
 
 # ▶️ Running the Application
