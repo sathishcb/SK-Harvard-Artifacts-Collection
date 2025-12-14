@@ -72,16 +72,14 @@ Stores general information about artifacts.
 
 # 📁 Project Structure
 Harvard-Artifacts-Project/  
-│
-├── app.py                # Main Streamlit UI Application
-├── api.py                # Async Harvard API fetch functions
-├── database.py           # Database engine, insert logic
-├── queries.py            # All 25 SQL queries stored clearly
-├── config.py             # API key + database credentials
-├── schema.sql            # Database schema (tables)
-│
-├── requirements.txt      # Python dependencies
-└── README.md             # Project documentation
+├── 📄 app.py → Main Streamlit UI Application  
+├── 🌐 api.py → Async Harvard API fetch functions  
+├── 🗄 database.py → Database engine, insert logic  
+├── 🧩 queries.py → All 25 SQL queries stored clearly  
+├── 🔐 config.py → API key + database credentials  
+├── 🗃 schema.sql → Database schema (tables)  
+├── 📦 requirements.txt → Python dependencies  
+└── 📘 README.md → Project documentation  
 
 
 # ⚙️ Setup Instructions
