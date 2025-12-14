@@ -5,16 +5,24 @@ import streamlit as st
 # Local modules
 from config import API_KEY, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME
 from api import fetch_harvard
-from database import get_engine,insert_artifact_data
+from database import get_engine,insert_artifact_data,create_database_if_missing, get_engine, run_schema
 from queries import SQL_QUERIES
 from sqlalchemy import text
-
 
 
 # ------------------------------------------------------------------
 # DATABASE ENGINE
 # ------------------------------------------------------------------
+
+
+# Create DB if missing
+create_database_if_missing(DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
+
+# Create engine for selected DB
 engine = get_engine(DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
+
+# Run schema.sql (tables)
+run_schema(engine)
 
 
 # ------------------------------------------------------------------
@@ -88,11 +96,11 @@ if btn_collect:
     st.success(f"✔ {classification} — 2500 Records Collected")
 
     c1, c2, c3 = st.columns(3)
-    c1.subheader("📌 Metadata Preview")
+    c1.subheader("📌 Metadata")
     c1.json(meta[:1])
-    c2.subheader("🖼 Media Preview")
+    c2.subheader("🖼 Media")
     c2.json(media[:1])
-    c3.subheader("🎨 Color Preview")
+    c3.subheader("🎨 Color")
     c3.json(colors[:5])
 
 
@@ -126,6 +134,10 @@ if st.session_state.show_queries:
 
     st.stop()  # Prevent insert panel from appearing simultaneously
 
+
+# ------------------------------------------------------------------
+# INSERT SECTION
+# ------------------------------------------------------------------
 # ---------------- INSERT UI SECTION ----------------
 if btn_migrate:
     if not st.session_state.data["meta"]:
@@ -149,4 +161,3 @@ if st.session_state.show_insert and not st.session_state.show_queries:
 
             if result:
                 st.session_state.insert_disabled = True
-
