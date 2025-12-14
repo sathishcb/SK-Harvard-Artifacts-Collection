@@ -1,14 +1,14 @@
 import asyncio
-import aiohttp
 import pandas as pd
 import streamlit as st
-from sqlalchemy import text
 
 # Local modules
 from config import API_KEY, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME
 from api import fetch_harvard
-from database import get_engine, insert_data
+from database import get_engine,insert_artifact_data
 from queries import SQL_QUERIES
+from sqlalchemy import text
+
 
 
 # ------------------------------------------------------------------
@@ -130,6 +130,7 @@ if st.session_state.show_queries:
 # ------------------------------------------------------------------
 # INSERT SECTION
 # ------------------------------------------------------------------
+# ---------------- INSERT UI SECTION ----------------
 if btn_migrate:
     if not st.session_state.data["meta"]:
         st.warning("⚠ Please collect data before migrating to SQL.")
@@ -138,7 +139,6 @@ if btn_migrate:
     else:
         st.session_state.show_insert = True
         st.session_state.show_queries = False
-
 
 if st.session_state.show_insert and not st.session_state.show_queries:
     st.subheader("Insert the Collected Data into Database")
@@ -149,24 +149,7 @@ if st.session_state.show_insert and not st.session_state.show_queries:
 
     else:
         if st.button("Insert", disabled=st.session_state.insert_disabled):
-            success = insert_data(engine, st.session_state.data)
+            result = insert_artifact_data(engine, st)
 
-            if not success:
-                st.warning("⚠ No new records to insert (duplicate prevention).")
-            else:
-                st.success("✔ Data Inserted Successfully!")
-
-                with engine.connect() as conn:
-                    st.header("📌 Metadata")
-                    df_meta_all = pd.read_sql("SELECT * FROM artifact_metadata ORDER BY id", conn)
-                    st.dataframe(df_meta_all, use_container_width=True)
-
-                    st.header("📌 Media")
-                    df_media_all = pd.read_sql("SELECT * FROM artifact_media ORDER BY objectid", conn)
-                    st.dataframe(df_media_all, use_container_width=True)
-
-                    st.header("📌 Colors")
-                    df_colors_all = pd.read_sql("SELECT * FROM artifact_colors ORDER BY objectid", conn)
-                    st.dataframe(df_colors_all, use_container_width=True)
-
-            st.session_state.insert_disabled = True
+            if result:
+                st.session_state.insert_disabled = True
