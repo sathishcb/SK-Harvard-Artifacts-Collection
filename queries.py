@@ -156,4 +156,3 @@ SQL_QUERIES={
         ORDER BY hue_count DESC
         """
 }
-<content omitted placeholder>
