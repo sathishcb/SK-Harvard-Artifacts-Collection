@@ -126,10 +126,6 @@ if st.session_state.show_queries:
 
     st.stop()  # Prevent insert panel from appearing simultaneously
 
-
-# ------------------------------------------------------------------
-# INSERT SECTION
-# ------------------------------------------------------------------
 # ---------------- INSERT UI SECTION ----------------
 if btn_migrate:
     if not st.session_state.data["meta"]:
@@ -153,3 +149,4 @@ if st.session_state.show_insert and not st.session_state.show_queries:
 
             if result:
                 st.session_state.insert_disabled = True
+
